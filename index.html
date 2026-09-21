@@ -41,50 +41,80 @@
         }
     </style>
     <style>
+        /* 浅色模式变量定义 */
         body.light-mode {
-            --bg-dark: #ffffff;
-            --bg-darker: #f3f4f6;
-            --text-gray-200: #111827;
-            --text-gray-400: #4b5563;
-            --border-gray-800: #e5e7eb;
-            --card-bg: #f9fafb;
+            --bg-dark: #f8fafc;
+            --bg-darker: #ffffff;
+            --text-gray-200: #0f172a;
+            --text-gray-400: #475569;
+            --border-gray-800: #e2e8f0;
+            --card-bg: #ffffff;
+            --btn-bg: #f1f5f9;
+            --btn-hover: #e2e8f0;
         }
 
-        body.light-mode .bg-dark {
+        /* 修复：覆盖body自身的深色背景 */
+        body.light-mode.bg-dark {
             background-color: var(--bg-dark) !important;
         }
 
+        /* 背景色覆盖 */
         body.light-mode .bg-darker {
             background-color: var(--bg-darker) !important;
         }
 
+        body.light-mode nav.bg-darker\/80 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* 文字颜色覆盖 */
+        body.light-mode.text-gray-200,
         body.light-mode .text-gray-200 {
             color: var(--text-gray-200) !important;
         }
 
-        body.light-mode .text-gray-400 {
+        body.light-mode .text-gray-400,
+        body.light-mode footer {
             color: var(--text-gray-400) !important;
         }
 
+        body.light-mode .text-white {
+            color: #0f172a !important;
+        }
+
+        /* 边框颜色覆盖 */
         body.light-mode .border-gray-800 {
             border-color: var(--border-gray-800) !important;
         }
 
+        body.light-mode .border-gray-600 {
+            border-color: #cbd5e1 !important;
+        }
+
+        /* 按钮与标签样式覆盖 */
         body.light-mode .bg-gray-800 {
-            background-color: #e5e7eb !important;
-            color: #111827 !important;
+            background-color: var(--btn-bg) !important;
+            color: var(--text-gray-200) !important;
         }
 
-        body.light-mode .bg-gray-700 {
-            background-color: #d1d5db !important;
+        body.light-mode .hover\:bg-gray-700:hover {
+            background-color: var(--btn-hover) !important;
         }
 
+        /* 卡片样式 */
         body.light-mode .card-hover {
             background-color: var(--card-bg) !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
-        body.light-mode footer {
-            color: #6b7280 !important;
+        body.light-mode .card-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 禁用交互的按钮样式 */
+        .contact-disabled {
+            cursor: default;
+            user-select: none;
         }
     </style>
 </head>
@@ -276,15 +306,17 @@
             </p>
 
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="mailto:your@email.com" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
+                <!-- 邮箱：禁用点击交互 -->
+                <div class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg contact-disabled">
                     <span>📧</span>
                     <span>your@email.com</span>
-                </a>
+                </div>
 
-                <a href="tel:+8618873980101" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
+                <!-- 电话：禁用点击交互 -->
+                <div class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg contact-disabled">
                     <span>📞</span>
                     <span>+86 18873980101</span>
-                </a>
+                </div>
 
                 <a href="#" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>💻</span>
@@ -293,7 +325,7 @@
 
                 <a href="https://space.bilibili.com/384557759?spm_id_from=333.1007.0.0" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>📺</span>
-                    <span>B站演示账号</span>
+                    <span>Bilibili个人主页</span>
                 </a>
             </div>
         </div>
