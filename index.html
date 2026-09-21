@@ -40,17 +40,67 @@
             scroll-behavior: smooth;
         }
     </style>
+    <style>
+        body.light-mode {
+            --bg-dark: #ffffff;
+            --bg-darker: #f3f4f6;
+            --text-gray-200: #111827;
+            --text-gray-400: #4b5563;
+            --border-gray-800: #e5e7eb;
+            --card-bg: #f9fafb;
+        }
+
+        body.light-mode .bg-dark {
+            background-color: var(--bg-dark) !important;
+        }
+
+        body.light-mode .bg-darker {
+            background-color: var(--bg-darker) !important;
+        }
+
+        body.light-mode .text-gray-200 {
+            color: var(--text-gray-200) !important;
+        }
+
+        body.light-mode .text-gray-400 {
+            color: var(--text-gray-400) !important;
+        }
+
+        body.light-mode .border-gray-800 {
+            border-color: var(--border-gray-800) !important;
+        }
+
+        body.light-mode .bg-gray-800 {
+            background-color: #e5e7eb !important;
+            color: #111827 !important;
+        }
+
+        body.light-mode .bg-gray-700 {
+            background-color: #d1d5db !important;
+        }
+
+        body.light-mode .card-hover {
+            background-color: var(--card-bg) !important;
+        }
+
+        body.light-mode footer {
+            color: #6b7280 !important;
+        }
+    </style>
 </head>
 <body class="bg-dark text-gray-200 font-sans">
     <!-- 导航栏 -->
     <nav class="fixed top-0 w-full bg-darker/80 backdrop-blur-md z-50 border-b border-gray-800">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-white">BouvierC</a>
-            <div class="flex gap-8 text-sm">
+            <div class="flex gap-6 text-sm items-center">
                 <a href="#home" class="hover:text-primary transition-colors">首页</a>
                 <a href="#projects" class="hover:text-primary transition-colors">作品</a>
                 <a href="#about" class="hover:text-primary transition-colors">关于我</a>
                 <a href="#contact" class="hover:text-primary transition-colors">联系</a>
+                <button id="themeToggle" class="px-3 py-1 border border-gray-600 rounded-lg hover:border-primary hover:text-primary transition-colors text-sm">
+                    浅色模式
+                </button>
             </div>
         </div>
     </nav>
@@ -97,7 +147,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 作品卡片 1：Only Jump Twice -->
                 <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
-                    <img src="https://picsum.photos/id/1/600/400" alt="《Only Jump Twice》" class="w-full h-48 object-cover">
+                    <img src="only-jump-twice-cover.jpg" alt="《Only Jump Twice》" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">《Only Jump Twice》平台跳跃游戏</h3>
                         <p class="text-gray-400 text-sm mb-4">
@@ -117,7 +167,7 @@
 
                 <!-- 作品卡片 2：AI语系识别网页 -->
                 <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
-                    <img src="https://picsum.photos/id/2/600/400" alt="AI语系识别网页" class="w-full h-48 object-cover">
+                    <img src="ai-language-cover.jpg" alt="AI语系识别网页" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">AI语系识别网页</h3>
                         <p class="text-gray-400 text-sm mb-4">
@@ -138,7 +188,7 @@
 
                 <!-- 作品卡片 3：The Samara -->
                 <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
-                    <img src="https://picsum.photos/id/3/600/400" alt="《The Samara》" class="w-full h-48 object-cover">
+                    <img src="the-samara-cover.jpg" alt="《The Samara》" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">《The Samara》类肉鸽游戏机制测试</h3>
                         <p class="text-gray-400 text-sm mb-4">
@@ -220,7 +270,7 @@
     <!-- 联系方式 -->
     <section id="contact" class="py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-white mb-4">联系我</h2>
+            <h2 class="text-3xl font-bold text-white text-center mb-4">联系我</h2>
             <p class="text-gray-400 mb-10 max-w-xl mx-auto">
                 欢迎游戏开发合作、工作机会交流，可通过以下方式联系我
             </p>
@@ -230,11 +280,18 @@
                     <span>📧</span>
                     <span>your@email.com</span>
                 </a>
+
+                <a href="tel:+8618873980101" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
+                    <span>📞</span>
+                    <span>+86 18873980101</span>
+                </a>
+
                 <a href="#" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>💻</span>
                     <span>GitHub 主页</span>
                 </a>
-                <a href="#" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
+
+                <a href="https://space.bilibili.com/384557759?spm_id_from=333.1007.0.0" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>📺</span>
                     <span>B站演示账号</span>
                 </a>
@@ -246,5 +303,29 @@
     <footer class="py-8 px-6 border-t border-gray-800 text-center text-gray-500 text-sm">
         <p>© 2026 BouvierC | 用代码与创意打造游戏世界</p>
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+
+            if (document.body.classList.contains('light-mode')) {
+                themeToggle.textContent = '深色模式';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeToggle.textContent = '浅色模式';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                themeToggle.textContent = '深色模式';
+            }
+        });
+    </script>
 </body>
 </html>
