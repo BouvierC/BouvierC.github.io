@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--【替换：你的名字】- 游戏开发者作品集-->
-    <title>张三 | 游戏开发者作品集</title>
+    <title>BouvierC | 游戏开发者作品集</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -46,8 +45,7 @@
     <!-- 导航栏 -->
     <nav class="fixed top-0 w-full bg-darker/80 backdrop-blur-md z-50 border-b border-gray-800">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!--【替换：你的名字/ID】-->
-            <a href="#" class="text-xl font-bold text-white">ZhangSan</a>
+            <a href="#" class="text-xl font-bold text-white">BouvierC</a>
             <div class="flex gap-8 text-sm">
                 <a href="#home" class="hover:text-primary transition-colors">首页</a>
                 <a href="#projects" class="hover:text-primary transition-colors">作品</a>
@@ -60,19 +58,15 @@
     <!-- 首页 Hero 区域 -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6">
         <div class="max-w-4xl text-center">
-            <!--【替换：你的头像图片路径，后续上传图片后修改】-->
             <img src="https://picsum.photos/id/237/200/200" alt="头像" 
                  class="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-primary/30 object-cover">
             
-            <!--【替换：你的名字】-->
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">你好，我是张三</h1>
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">你好，我是BouvierC</h1>
             
-            <!--【替换：你的身份介绍】-->
             <p class="text-xl md:text-2xl text-gradient bg-gradient-to-r from-primary to-cyan-300 mb-6">
                 游戏开发者 / 独立插件作者
             </p>
             
-            <!--【替换：你的核心技能标签】-->
             <div class="flex flex-wrap justify-center gap-3 mb-10">
                 <span class="px-4 py-1.5 bg-gray-800 rounded-full text-sm border border-gray-700">Unity</span>
                 <span class="px-4 py-1.5 bg-gray-800 rounded-full text-sm border border-gray-700">Python</span>
@@ -85,7 +79,6 @@
                 <a href="#projects" class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-cyan-500 transition-colors">
                     查看我的作品
                 </a>
-                <!--【替换：你的简历PDF链接，后续上传后修改】-->
                 <a href="#" class="px-8 py-3 border border-gray-600 rounded-lg hover:border-primary hover:text-primary transition-colors">
                     下载简历 PDF
                 </a>
@@ -102,24 +95,19 @@
             </p>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 作品卡片 1 -->
+                <!-- 作品卡片 1：Only Jump Twice -->
                 <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
-                    <!--【替换：作品1封面图】-->
-                    <img src="https://picsum.photos/id/1/600/400" alt="项目1" class="w-full h-48 object-cover">
+                    <img src="https://picsum.photos/id/1/600/400" alt="《Only Jump Twice》" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <!--【替换：作品1名称】-->
                         <h3 class="text-xl font-bold text-white mb-2">《Only Jump Twice》平台跳跃游戏</h3>
-                        <!--【替换：作品1简介】-->
                         <p class="text-gray-400 text-sm mb-4">
                             基于Unity开发的肉鸽平台跳跃游戏，设计了30+关卡与随机道具系统，实现了流畅的二段跳物理手感。
                         </p>
-                        <!--【替换：作品1技术标签】-->
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">Unity</span>
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">C#</span>
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">关卡设计</span>
                         </div>
-                        <!--【替换：作品1链接】-->
                         <div class="flex gap-3 text-sm">
                             <a href="#" class="text-primary hover:underline">在线试玩</a>
                             <a href="#" class="text-primary hover:underline">源码仓库</a>
@@ -127,49 +115,41 @@
                     </div>
                 </div>
 
-                <!-- 作品卡片 2 -->
+                <!-- 作品卡片 2：AI语系识别网页 -->
                 <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
-                    <!--【替换：作品2封面图】-->
-                    <img src="https://picsum.photos/id/2/600/400" alt="项目2" class="w-full h-48 object-cover">
+                    <img src="https://picsum.photos/id/2/600/400" alt="AI语系识别网页" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <!--【替换：作品2名称】-->
-                        <h3 class="text-xl font-bold text-white mb-2">MC服务器管理插件</h3>
-                        <!--【替换：作品2简介】-->
+                        <h3 class="text-xl font-bold text-white mb-2">AI语系识别网页</h3>
                         <p class="text-gray-400 text-sm mb-4">
-                            基于Python开发的Minecraft服务器管理工具，支持自动备份、玩家权限管理与运行状态监控面板。
+                            基于scikit-learn算法库与PyTorch深度学习框架构建，使用Kespeech数据集训练，实现不同口音与语种的智能识别与分类。
                         </p>
-                        <!--【替换：作品2技术标签】-->
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">Python</span>
-                            <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">服务器运维</span>
-                            <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">GUI</span>
+                            <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">scikit-learn</span>
+                            <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">PyTorch</span>
+                            <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">语音识别</span>
                         </div>
-                        <!--【替换：作品2链接】-->
                         <div class="flex gap-3 text-sm">
-                            <a href="#" class="text-primary hover:underline">下载地址</a>
+                            <a href="#" class="text-primary hover:underline">在线演示</a>
                             <a href="#" class="text-primary hover:underline">源码仓库</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- 作品卡片 3 -->
+                <!-- 作品卡片 3：The Samara -->
                 <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
-                    <!--【替换：作品3封面图】-->
-                    <img src="https://picsum.photos/id/3/600/400" alt="项目3" class="w-full h-48 object-cover">
+                    <img src="https://picsum.photos/id/3/600/400" alt="《The Samara》" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <!--【替换：作品3名称】-->
-                        <h3 class="text-xl font-bold text-white mb-2">《轮回》类肉鸽原型</h3>
-                        <!--【替换：作品3简介】-->
+                        <h3 class="text-xl font-bold text-white mb-2">《The Samara》类肉鸽游戏机制测试</h3>
                         <p class="text-gray-400 text-sm mb-4">
-                            独立设计的类肉鸽游戏原型，包含技能树系统、随机房间生成与多周目难度递进机制。
+                            独立设计的类肉鸽游戏机制原型，验证技能树系统、随机房间生成与多周目难度递进的核心玩法循环。
                         </p>
-                        <!--【替换：作品3技术标签】-->
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">游戏设计</span>
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">原型开发</span>
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">数值策划</span>
+                            <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">机制测试</span>
                         </div>
-                        <!--【替换：作品3链接】-->
                         <div class="flex gap-3 text-sm">
                             <a href="#" class="text-primary hover:underline">演示视频</a>
                             <a href="#" class="text-primary hover:underline">设计文档</a>
@@ -190,7 +170,6 @@
                 <div>
                     <h3 class="text-xl font-bold text-white mb-4">个人经历</h3>
                     <div class="space-y-6 text-gray-300">
-                        <!--【替换：你的经历】-->
                         <div>
                             <p class="text-primary font-medium">2026.06 - 至今 | 游戏策划实习</p>
                             <p class="text-sm text-gray-400 mt-1">创梦天地长沙分部，负责三消游戏关卡设计与运营活动开发，参与飞书AI插件工具开发。</p>
@@ -205,7 +184,6 @@
                 <div>
                     <h3 class="text-xl font-bold text-white mb-4">技术能力</h3>
                     <div class="space-y-4">
-                        <!--【替换：你的技能】-->
                         <div>
                             <div class="flex justify-between mb-1">
                                 <span>Unity / C# 开发</span>
@@ -248,17 +226,14 @@
             </p>
 
             <div class="flex flex-wrap justify-center gap-6">
-                <!--【替换：你的邮箱】-->
                 <a href="mailto:your@email.com" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>📧</span>
                     <span>your@email.com</span>
                 </a>
-                <!--【替换：你的GitHub链接】-->
                 <a href="#" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>💻</span>
                     <span>GitHub 主页</span>
                 </a>
-                <!--【替换：你的B站/其他链接，可选】-->
                 <a href="#" class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
                     <span>📺</span>
                     <span>B站演示账号</span>
@@ -269,8 +244,7 @@
 
     <!-- 页脚 -->
     <footer class="py-8 px-6 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <!--【替换：你的名字】-->
-        <p>© 2026 张三 | 用代码与创意打造游戏世界</p>
+        <p>© 2026 BouvierC | 用代码与创意打造游戏世界</p>
     </footer>
 </body>
 </html>
