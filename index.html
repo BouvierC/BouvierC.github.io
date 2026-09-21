@@ -111,10 +111,11 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 禁用交互的按钮样式 */
+        /* 禁用交互的按钮样式 + 渐变过渡 */
         .contact-disabled {
             cursor: default;
             user-select: none;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -244,25 +245,56 @@
     <section id="about" class="py-24 px-6 bg-darker">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-white text-center mb-4">关于我</h2>
-            <p class="text-gray-400 text-center mb-16">专注游戏开发与工具插件创作，热爱打磨玩法与技术细节</p>
+            <p class="text-gray-400 text-center mb-16">专注游戏开发运营与AI工具落地，兼具产品思维与技术实现能力</p>
 
             <div class="grid md:grid-cols-2 gap-12">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-4">个人经历</h3>
-                    <div class="space-y-6 text-gray-300">
+                    <h3 class="text-xl font-bold text-white mb-6">个人经历</h3>
+                    <div class="space-y-8 text-gray-300">
+                        <!-- 经历1：最新 -->
                         <div>
-                            <p class="text-primary font-medium">2026.06 - 至今 | 游戏策划实习</p>
-                            <p class="text-sm text-gray-400 mt-1">创梦天地长沙分部，负责三消游戏关卡设计与运营活动开发，参与飞书AI插件工具开发。</p>
+                            <p class="text-primary font-medium">2026.06 - 2026.08 | 创梦天地（私企）</p>
+                            <p class="text-white font-medium mt-1">游戏运营与后端工程师（AI数据方向）</p>
+                            <ul class="text-sm text-gray-400 mt-2 space-y-1.5 list-disc pl-5">
+                                <li>平台数据迁移：协助完成智齿客服平台相关数据迁移工作，确保历史数据完整、准确迁移至新系统。</li>
+                                <li>智能体开发：开发用于玩家调研、未成年判定及充值记录比对查询的智能体（Agent），将重复性人工查询自动化，提升运营效率。</li>
+                            </ul>
                         </div>
+
+                        <!-- 经历2 -->
                         <div>
-                            <p class="text-primary font-medium">2023.09 - 至今 | 数字媒体技术 本科</p>
-                            <p class="text-sm text-gray-400 mt-1">澳门科技大学，专注游戏开发、交互设计与数字媒体技术方向。</p>
+                            <p class="text-primary font-medium">2025.06 - 2025.08 | 创梦天地（私企）</p>
+                            <p class="text-white font-medium mt-1">游戏运营与开发支持</p>
+                            <ul class="text-sm text-gray-400 mt-2 space-y-1.5 list-disc pl-5">
+                                <li>游戏内测与开发支持：参与《超级洞洞乐》内测工作，协助游戏功能测试与开发协作，优化游戏操作体验，缩短游戏bug生命周期，反馈并推动修复多项体验问题。</li>
+                                <li>长线游戏运营：协助《神庙逃亡》《梦幻花园》系列游戏的活动排期规划与用户问题处理，保障线上活动按时上线与用户诉求闭环。</li>
+                            </ul>
+                        </div>
+
+                        <!-- 经历3 -->
+                        <div>
+                            <p class="text-primary font-medium">2024.06 - 2024.08 | 湖南卫视（国企）</p>
+                            <p class="text-white font-medium mt-1">节目制作与设计实习生</p>
+                            <ul class="text-sm text-gray-400 mt-2 space-y-1.5 list-disc pl-5">
+                                <li>节目协助：协助郭舟导演，参与《乡村》《中国澳交》栏目的拍摄与后期剪辑工作，熟悉电视节目制作全流程。</li>
+                                <li>平面设计：为2024年永州柑橘节独立设计舞台海报，作品获采用并用于活动现场视觉呈现。</li>
+                                <li>跨部门协作：与导演组、摄影组及后期团队紧密配合，保障节目录制与素材交付进度。</li>
+                            </ul>
+                        </div>
+
+                        <!-- 经历4：教育背景 -->
+                        <div>
+                            <p class="text-primary font-medium">2023.09 - 至今 | 澳门科技大学</p>
+                            <p class="text-white font-medium mt-1">数字媒体技术 本科</p>
+                            <p class="text-sm text-gray-400 mt-2">
+                                创思社社团成员，专注游戏开发运营、交互设计与数字媒体技术方向。
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-4">技术能力</h3>
+                    <h3 class="text-xl font-bold text-white mb-6">技术能力</h3>
                     <div class="space-y-4">
                         <div>
                             <div class="flex justify-between mb-1">
@@ -275,11 +307,11 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span>Python 工具开发</span>
+                                <span>Python 工具开发 / AI应用</span>
                                 <span class="text-primary">熟练</span>
                             </div>
                             <div class="w-full bg-gray-800 rounded-full h-2">
-                                <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                                <div class="bg-primary h-2 rounded-full" style="width: 78%"></div>
                             </div>
                         </div>
                         <div>
@@ -289,6 +321,15 @@
                             </div>
                             <div class="w-full bg-gray-800 rounded-full h-2">
                                 <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>游戏运营 / 数据分析</span>
+                                <span class="text-primary">掌握</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 70%"></div>
                             </div>
                         </div>
                     </div>
@@ -306,10 +347,10 @@
             </p>
 
             <div class="flex flex-wrap justify-center gap-6">
-                <!-- 邮箱：禁用点击交互 -->
+                <!-- QQ邮箱：禁用点击交互 -->
                 <div class="flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-lg contact-disabled">
                     <span>📧</span>
-                    <span>your@email.com</span>
+                    <span>QQ：320386524@qq.com</span>
                 </div>
 
                 <!-- 电话：禁用点击交互 -->
