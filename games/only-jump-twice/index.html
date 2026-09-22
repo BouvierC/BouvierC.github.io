@@ -121,7 +121,7 @@
             letter-spacing: 1px;
         }
 
-        /* ===== 警告横幅（Unity默认，隐藏） ===== */
+        /* ===== 警告横幅（Unity内部使用，隐藏显示） ===== */
         #unity-warning {
             display: none;
         }
@@ -138,7 +138,7 @@
     <!-- 游戏容器 -->
     <div id="game-wrapper">
         <div id="unity-container">
-            <canvas id="unity-canvas" tabindex="-1"></canvas>
+            <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
         </div>
     </div>
 
@@ -152,27 +152,42 @@
         <div class="loading-percent" id="loading-percent">0%</div>
     </div>
 
+    <!-- Unity警告横幅（隐藏） -->
+    <div id="unity-warning"> </div>
+
     <script>
-        // ===== 构建配置（Unity模板占位符） =====
+        // ===== Unity构建配置（模板占位符将在构建时被替换） =====
         var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/%UNITY_WEBGL_LOADER_URL%";
+        var loaderUrl = buildUrl + "/WebGL.loader.js";
         var config = {
-            dataUrl: buildUrl + "/%UNITY_WEBGL_BUILD_URL%.data.unityweb",
-            frameworkUrl: buildUrl + "/%UNITY_WEBGL_BUILD_URL%.framework.js.unityweb",
-            codeUrl: buildUrl + "/%UNITY_WEBGL_BUILD_URL%.wasm.unityweb",
+            dataUrl: buildUrl + "/WebGL.data.unityweb",
+            frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
+            codeUrl: buildUrl + "/WebGL.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
-            companyName: "%UNITY_COMPANY_NAME%",
-            productName: "%UNITY_PRODUCT_NAME%",
-            productVersion: "%UNITY_VERSION%",
+            companyName: "DefaultCompany",
+            productName: "final work",
+            productVersion: "1.0",
         };
 
-        // ===== 移动端检测 =====
-        var isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        // ===== 16:9 画布自适应 =====
+        // ===== DOM引用 =====
         var canvas = document.querySelector("#unity-canvas");
         var container = document.querySelector("#unity-container");
+        var loadingScreen = document.getElementById("loading-screen");
+        var loadingBarFill = document.getElementById("loading-bar-fill");
+        var loadingPercent = document.getElementById("loading-percent");
+        var rotateOverlay = document.getElementById("rotate-overlay");
 
+        // ===== 移动端检测 =====
+        var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobileDevice) {
+            var meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+
+        // ===== 16:9 画布自适应 =====
         function resizeGameCanvas() {
             var gameRatio = 16 / 9;
             var winW = window.innerWidth;
@@ -181,11 +196,9 @@
 
             var displayW, displayH;
             if (winRatio > gameRatio) {
-                // 窗口比16:9更宽，按高度适配
                 displayH = winH;
                 displayW = Math.round(winH * gameRatio);
             } else {
-                // 窗口比16:9更高，按宽度适配
                 displayW = winW;
                 displayH = Math.round(winW / gameRatio);
             }
@@ -203,16 +216,11 @@
         resizeGameCanvas();
 
         // ===== 横屏检测（仅移动端） =====
-        var rotateOverlay = document.getElementById('rotate-overlay');
-
         function checkOrientation() {
             if (isMobileDevice && window.innerHeight > window.innerWidth) {
-                // 移动端竖屏，显示旋转提示
                 rotateOverlay.classList.add('active');
             } else {
-                // 横屏或PC端，隐藏提示
                 rotateOverlay.classList.remove('active');
-                // 横屏时重新计算画布大小
                 resizeGameCanvas();
             }
         }
@@ -224,10 +232,6 @@
         checkOrientation();
 
         // ===== 加载进度更新 =====
-        var loadingScreen = document.getElementById('loading-screen');
-        var loadingBarFill = document.getElementById('loading-bar-fill');
-        var loadingPercent = document.getElementById('loading-percent');
-
         function updateLoadingProgress(progress) {
             var percent = Math.round(progress * 100);
             loadingBarFill.style.width = percent + "%";
@@ -248,11 +252,9 @@
             createUnityInstance(canvas, config, function(progress) {
                 updateLoadingProgress(progress);
             }).then(function(unityInstance) {
-                // 加载完成，隐藏加载界面
                 hideLoadingScreen();
             }).catch(function(message) {
-                // 加载出错
-                loadingPercent.textContent = "加载失败";
+                loadingPercent.textContent = "加载失败，请刷新";
                 loadingPercent.style.color = "#f44";
                 console.error(message);
                 if (typeof message === 'string') {
