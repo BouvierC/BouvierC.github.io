@@ -84,43 +84,6 @@
             font-variant-numeric: tabular-nums;
         }
 
-        /* ===== 横屏旋转提示遮罩（移动端竖屏时显示） ===== */
-        #rotate-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: #000;
-            z-index: 200;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        #rotate-overlay.active {
-            display: flex;
-        }
-        .rotate-icon {
-            font-size: 72px;
-            color: #fff;
-            margin-bottom: 28px;
-            animation: rotateHint 2s ease-in-out infinite;
-        }
-        @keyframes rotateHint {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(90deg); }
-        }
-        .rotate-text {
-            color: #fff;
-            font-size: 18px;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-        .rotate-subtext {
-            color: #666;
-            font-size: 13px;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-
         /* ===== 警告横幅（Unity内部使用，隐藏显示） ===== */
         #unity-warning {
             display: none;
@@ -128,13 +91,6 @@
     </style>
 </head>
 <body>
-    <!-- 横屏旋转提示遮罩 -->
-    <div id="rotate-overlay">
-        <div class="rotate-icon">&#8635;</div>
-        <div class="rotate-text">请旋转设备横屏游玩</div>
-        <div class="rotate-subtext">ROTATE YOUR DEVICE TO PLAY</div>
-    </div>
-
     <!-- 游戏容器 -->
     <div id="game-wrapper">
         <div id="unity-container">
@@ -172,13 +128,17 @@
         // ===== DOM引用 =====
         var canvas = document.querySelector("#unity-canvas");
         var container = document.querySelector("#unity-container");
+        var gameWrapper = document.getElementById("game-wrapper");
         var loadingScreen = document.getElementById("loading-screen");
         var loadingBarFill = document.getElementById("loading-bar-fill");
         var loadingPercent = document.getElementById("loading-percent");
-        var rotateOverlay = document.getElementById("rotate-overlay");
 
-        // ===== 移动端检测 =====
-        var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        // ===== 移动端检测（User-Agent + 触摸 + 屏幕尺寸） =====
+        var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+            || ('ontouchstart' in window && window.innerWidth < 1024);
+
+        // 当前是否处于强制旋转状态
+        var isRotated = false;
 
         if (isMobileDevice) {
             var meta = document.createElement('meta');
@@ -187,11 +147,75 @@
             document.getElementsByTagName('head')[0].appendChild(meta);
         }
 
+        // ===== 移动端强制横屏显示 =====
+        // 当移动端竖屏时，用CSS transform将游戏容器旋转90度，
+        // 无需用户手动旋转设备。PC端不受影响。
+        function forceLandscape() {
+            if (!isMobileDevice) {
+                // PC端：正常显示，不旋转
+                isRotated = false;
+                resetElementTransform(gameWrapper);
+                resetElementTransform(loadingScreen);
+                resizeGameCanvas();
+                return;
+            }
+
+            if (window.innerHeight > window.innerWidth) {
+                // ===== 竖屏：强制旋转90度 =====
+                isRotated = true;
+                // 旋转后：容器宽度 = 视口高度，容器高度 = 视口宽度
+                var rotatedW = window.innerHeight;
+                var rotatedH = window.innerWidth;
+
+                applyRotation(gameWrapper, rotatedW, rotatedH);
+                applyRotation(loadingScreen, rotatedW, rotatedH);
+            } else {
+                // ===== 横屏：正常显示 =====
+                isRotated = false;
+                resetElementTransform(gameWrapper);
+                resetElementTransform(loadingScreen);
+            }
+
+            resizeGameCanvas();
+        }
+
+        // 对指定元素应用90度旋转并居中
+        function applyRotation(el, w, h) {
+            el.style.transform = 'rotate(90deg)';
+            el.style.transformOrigin = 'center center';
+            el.style.position = 'fixed';
+            el.style.width = w + 'px';
+            el.style.height = h + 'px';
+            el.style.left = '50%';
+            el.style.top = '50%';
+            el.style.right = 'auto';
+            el.style.bottom = 'auto';
+            el.style.marginLeft = (-w / 2) + 'px';
+            el.style.marginTop = (-h / 2) + 'px';
+        }
+
+        // 重置元素变换（恢复正常全屏显示）
+        function resetElementTransform(el) {
+            el.style.transform = 'none';
+            el.style.transformOrigin = 'center center';
+            el.style.position = 'fixed';
+            el.style.width = '100%';
+            el.style.height = '100%';
+            el.style.left = '0';
+            el.style.top = '0';
+            el.style.right = '0';
+            el.style.bottom = '0';
+            el.style.marginLeft = '0';
+            el.style.marginTop = '0';
+        }
+
         // ===== 16:9 画布自适应 =====
+        // 注意：当处于强制旋转状态时，有效视口宽高需要互换
         function resizeGameCanvas() {
             var gameRatio = 16 / 9;
-            var winW = window.innerWidth;
-            var winH = window.innerHeight;
+            // 旋转后：视觉上的宽度 = 实际视口高度，视觉上的高度 = 实际视口宽度
+            var winW = isRotated ? window.innerHeight : window.innerWidth;
+            var winH = isRotated ? window.innerWidth : window.innerHeight;
             var winRatio = winW / winH;
 
             var displayW, displayH;
@@ -209,27 +233,16 @@
             container.style.height = displayH + "px";
         }
 
-        window.addEventListener('resize', resizeGameCanvas);
-        window.addEventListener('orientationchange', function() {
-            setTimeout(resizeGameCanvas, 100);
+        // ===== 事件监听 =====
+        window.addEventListener('resize', function() {
+            forceLandscape();
         });
-        resizeGameCanvas();
-
-        // ===== 横屏检测（仅移动端） =====
-        function checkOrientation() {
-            if (isMobileDevice && window.innerHeight > window.innerWidth) {
-                rotateOverlay.classList.add('active');
-            } else {
-                rotateOverlay.classList.remove('active');
-                resizeGameCanvas();
-            }
-        }
-
-        window.addEventListener('resize', checkOrientation);
         window.addEventListener('orientationchange', function() {
-            setTimeout(checkOrientation, 100);
+            setTimeout(forceLandscape, 100);
         });
-        checkOrientation();
+
+        // 初始化：强制横屏 + 画布自适应
+        forceLandscape();
 
         // ===== 加载进度更新 =====
         function updateLoadingProgress(progress) {
