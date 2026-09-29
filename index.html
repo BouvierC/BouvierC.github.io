@@ -117,6 +117,11 @@
             user-select: none;
             transition: all 0.3s ease;
         }
+
+        /* 可点击卡片：鼠标变手型 */
+        .clickable-card {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="bg-dark text-gray-200 font-sans">
@@ -173,8 +178,9 @@
             </p>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 作品卡片 1：Only Jump Twice -->
-                <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover">
+                <!-- 作品卡片 1：Only Jump Twice（整卡可点击跳转） -->
+                <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 card-hover clickable-card"
+                     onclick="window.open('https://bouvierc.github.io/games/only-jump-twice/', '_blank')">
                     <img src="only-jump-twice-cover.jpg" alt="《Only Jump Twice》" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">《Only Jump Twice》平台跳跃游戏</h3>
@@ -187,8 +193,8 @@
                             <span class="text-xs px-2 py-1 bg-gray-800 rounded text-primary">关卡设计</span>
                         </div>
                         <div class="flex gap-3 text-sm">
-                            <a href="https://bouvierc.github.io/games/only-jump-twice/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">在线试玩</a>
-                            <a href="#" class="text-primary hover:underline">源码仓库</a>
+                            <span class="text-primary">点击卡片在线试玩 →</span>
+                            <a href="#" onclick="event.stopPropagation()" class="text-primary hover:underline ml-auto">源码仓库</a>
                         </div>
                     </div>
                 </div>
