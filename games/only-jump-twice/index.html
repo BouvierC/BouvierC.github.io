@@ -88,6 +88,19 @@
         #unity-warning {
             display: none;
         }
+
+        #restart-game {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 16px 36px;
+            border: 0;
+            color: #103436;
+            background: #f2d477;
+            font: bold 16px Arial, sans-serif;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -110,15 +123,16 @@
 
     <!-- Unity警告横幅（隐藏） -->
     <div id="unity-warning"> </div>
+    <button id="restart-game" type="button" hidden>PLAY AGAIN</button>
 
     <script>
         // ===== Unity构建配置（模板占位符将在构建时被替换） =====
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/WebGL.loader.js";
         var config = {
-            dataUrl: buildUrl + "/WebGL.data.unityweb",
-            frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb",
-            codeUrl: buildUrl + "/WebGL.wasm.unityweb",
+            dataUrl: buildUrl + "/WebGL.data.unityweb?v=60b330037fc2",
+            frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb?v=1bf11e37f953",
+            codeUrl: buildUrl + "/WebGL.wasm.unityweb?v=f51ad3a48910",
             streamingAssetsUrl: "StreamingAssets",
             companyName: "DefaultCompany",
             productName: "final work",
@@ -258,6 +272,8 @@
             }, 500);
         }
 
+        document.getElementById("restart-game").addEventListener("click", () => location.reload());
+
         // ===== 加载 Unity 实例 =====
         var script = document.createElement("script");
         script.src = loaderUrl;
@@ -265,6 +281,22 @@
             createUnityInstance(canvas, config, function(progress) {
                 updateLoadingProgress(progress);
             }).then(function(unityInstance) {
+                window.addEventListener("only-jump-twice-exit", async function () {
+                    try {
+                        await unityInstance.Quit();
+                    } catch (error) {
+                        console.error(error);
+                    }
+                    if (document.querySelector("#stage-picker")) {
+                        location.reload();
+                        return;
+                    }
+                    gameWrapper.hidden = true;
+                    gameWrapper.style.display = "none";
+                    const restart = document.getElementById("restart-game");
+                    restart.hidden = false;
+                    restart.focus();
+                }, { once: true });
                 hideLoadingScreen();
             }).catch(function(message) {
                 loadingPercent.textContent = "加载失败，请刷新";
